@@ -1,0 +1,10 @@
+runs
+wandb
+lightning_logs
+__pycache__
+weights
+DATA
+data/*
+filternet.egg-info/
+.vscode
+outputs/
