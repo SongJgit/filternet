@@ -25,26 +25,14 @@ def main(args: argparse.ArgumentParser, cfg: Config) -> None:
 
     data_module = CommonDataModule(cfg)
     data_module.setup()
-    # model.
 
+    # model.
     model = MODELS.build(
         dict(type=cfg.TRAINER.type, cfg=cfg, save_dir=save_dir))
     # trainer
     lr_monitor = LearningRateMonitor(logging_interval='step')
-    # model_monitor = ModelCheckpoint(
-    #     dirpath=save_dir['weight_dir'],
-    #     filename='epoch={epoch}-val_RMSE={val/RMSE:.5f}',
-    #     mode='min',
-    #     save_top_k=-1,
-    #     auto_insert_metric_name=False,
-    #     monitor='val/RMSE')
-    model_monitor = ModelCheckpoint(
-        dirpath=save_dir['weight_dir'],
-        filename='epoch={epoch}-val_mAP={val/mAP:.5f}',
-        mode='max',
-        save_top_k=-1,
-        auto_insert_metric_name=False,
-        monitor='val/mAP')
+    model_monitor = ModelCheckpoint(dirpath=save_dir['weight_dir'],
+                                    **cfg.MONITOR.MODEL_MONITOR)
 
     callbacks = [lr_monitor, model_monitor]
     wandb_logger = WandbLogger(project=cfg.LOGGER.project,
@@ -61,11 +49,7 @@ def main(args: argparse.ArgumentParser, cfg: Config) -> None:
         devices=cfg.TRAINER.device,
         num_sanity_val_steps=0,
         check_val_every_n_epoch=cfg.TRAINER.check_val_every_n_epoch
-        if cfg.TRAINER.check_val_every_n_epoch is not None else 1
-        # manual gradient clip
-        # gradient_clip_val=cfg.TRAINER.gradient_clip_val,
-        # gradient_clip_algorithm=cfg.TRAINER.gradient_clip_algorithm,
-    )
+        if cfg.TRAINER.check_val_every_n_epoch is not None else 1)
 
     trainer.fit(model, datamodule=data_module)
     if not osp.exists(save_dir['config_dir']):
