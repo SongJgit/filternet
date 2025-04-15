@@ -1,8 +1,8 @@
-# FilterNet - Data-Driven Filtering in Python(We will upload the full code once the paper has been accepted)
+# FilterNet - Learning-Aided Filtering in Python(We will upload the full code once the paper has been accepted)
 
 ## Introduction
 
-This library provides Data-Driven Kalman filtering and various related optimal and non-optimal filtering software written in Python.
+This library provides Learning-Aided/Data-Driven Kalman filtering and various related optimal and non-optimal filtering software written in Python.
 It contains Kalman filters, Extended Kalman filters, KalmanNet, Split-KalmanNet and Ours Semantic-Independent KalmanNet.
 This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs/pytorch/stable/)**, **[MMEngine](https://github.com/open-mmlab/mmengine)**, and **[WandB](https://wandb.ai/site)**.
 
@@ -28,8 +28,99 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
   **Pytorch-Lightning** supports a variety of loggers, such as **tensorboard** and **wandb**, but in this project, we use **wandb** as the default logger because it is very easy to share training logs, as well as very easy for multiple people to collaborate.
   In the future, we will share the logs of all models in **wandb**, so that you can easily view and compare the performance and convergence speed of different models.
 
+## Model Zoo
+
+<div align="center">
+  <b>Overview</b>
+</div>
+<table align="center">
+  <tbody>
+    <tr align="center" valign="center">
+      <td>
+        <b>Supported methods</b>
+      </td>
+      <td>
+        <b>Supported datasets</b>
+      </td>
+      <td>
+        <b>Supported Tasks</b>
+      </td>
+      <td>
+        <b>Others</b>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/document/9733186">KalmanNet (ICASSP'2021, TSP'2022)</a></li>
+          <li><a href="https://ieeexplore.ieee.org/abstract/document/10120968">Split-KalmanNet (TVT'2023)</a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/10289946">DANSE (EUSIPCO'2023, TSP'2024)</a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/document/9733186">Lorenz</a></li>
+          <li><a href="http://journals.sagepub.com/doi/10.1177/0278364915614638">NCLT </a></li>
+          <li><a href="">MOT17/MOT20/DanceTrack/SoccerNet For Motion Estimation </a></li>
+        </a></li>
+        </ul>
+      </td>
+            <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/document/9733186">State Estimation</a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/10605082">Sensor Fusion</a></li>
+          <li><a href="">Motion Estimation</a></li>
+        </a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><b>Supported Loss</b></li>
+        <ul>
+          <li><a href="">MSELoss</a></li>
+          <li><a href="">SmoothL1oss</a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/10485649/">DanseLoss</a></li>
+          <li><a href="">Any Pytorch Loss Function For Regression</a></li>
+        </ul>
+        </ul>
+                <ul>
+          <li><b>Supported Training Strategy</b></li>
+        <ul>
+          <li><a href="http://ieeexplore.ieee.org/document/58337/">Standard BPTT</a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/10605082">Alternative TBPTT</a></li>
+        </ul>
+        </ul>
+      </td>
+  </tbody>
+</table>
+
+## Supervised Learning or Unsupervised Learning?
+
+| **Methods** | **Supervised Learning** | **Unsupervised Learning** |
+|:-------------------:|:-----------------------:|:-------------------------:|
+| **KalmanNet** | ✔ | ✔ |
+| **Split-KalmanNet** | ✔ | ✔ |
+| **Danse** | ✔ | ✔ |
+
 ## Getting Started
 
 ### Installation
 
 Please refer to [Installation](./docs/en/Installation.md)
+
+## Citation
+
+If you find this repo useful, please cite our paper.
+
+```bibtex
+@ARTICLE{10605082,
+  author={Song, Jian and Mei, Wei and Xu, Yunfeng and Fu, Qiang and Bu, Lina},
+  journal={IEEE Signal Processing Letters},
+  title={Practical Implementation of KalmanNet for Accurate Data Fusion in Integrated Navigation},
+  year={2024},
+  volume={31},
+  number={},
+  pages={1890-1894},
+  keywords={Training;Sensor fusion;Global Positioning System;Navigation;Vectors;Kalman filters;Wheels;Integrated navigation and localization;Kalman filter;recurrent neural networks;sensor fusion},
+  doi={10.1109/LSP.2024.3431443}}
+```
