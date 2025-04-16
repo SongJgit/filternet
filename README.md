@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This library provides Learning-Aided/Data-Driven Kalman filtering and various related optimal and non-optimal filtering software written in Python.
-It contains Kalman filters, Extended Kalman filters, KalmanNet, Split-KalmanNet and Ours Semantic-Independent KalmanNet.
+This library provides Learning-Aided/Data-Driven Kalman filtering and related optimal and non-optimal filtering software in Python.
+It contains Kalman filters, Extended Kalman filters, KalmanNet, Split-KalmanNet, and Ours Semantic-Independent KalmanNet(submitted to Information Fusion, waiting review).
 This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs/pytorch/stable/)**, **[MMEngine](https://github.com/open-mmlab/mmengine)**, and **[WandB](https://wandb.ai/site)**.
 
 ## Highlights
