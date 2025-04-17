@@ -1,4 +1,18 @@
-# FilterNet - Learning-Aided Filtering in Python(We will upload the full code once the paper has been accepted)
+<p align="center">
+    <a href=""><img src="https://img.shields.io/badge/python-3.10+-aff.svg"></a>
+    <a href=""><img src="https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg"></a>
+
+</p>
+
+# FilterNet - Learning-Aided Filtering in Python
+
+## Notice
+
+We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
+
+## 🥳 What's New
+
+- Feb. 2025: 🌟🌟🌟 First commit. Added support for model-based Kalman filter, Extended Kalman filter, Interacting Multiple model, and learning-aided Kalman filtering KalmanNet, Split-KalmanNet.
 
 ## Introduction
 
@@ -29,6 +43,8 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
   In the future, we will share the logs of all models in **wandb**, so that you can easily view and compare the performance and convergence speed of different models.
 
 ## Model Zoo
+
+### Learning-Aided Kalman Filtering
 
 <div align="center">
   <b>Overview</b>
@@ -94,6 +110,51 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
   </tbody>
 </table>
 
+### Model-Based Kalman Filtering
+
+<div align="center">
+  <b>Overview</b>
+</div>
+<table align="center">
+  <tbody>
+    <tr align="center" valign="center">
+      <td>
+        <b>Supported methods</b>
+      </td>
+      <td>
+        <b>Supported datasets</b>
+      </td>
+      <td>
+        <b>Supported Tasks</b>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/abstract/document/5311910">Kalman filter </a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/1102206">Extended Kalman filter </a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/1299">Interacting Multiple Model </a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/document/9733186">Lorenz</a></li>
+          <li><a href="http://journals.sagepub.com/doi/10.1177/0278364915614638">NCLT </a></li>
+          <li><a href="">MOT17/MOT20/DanceTrack/SoccerNet For Motion Estimation </a></li>
+        </a></li>
+        </ul>
+      </td>
+            <td>
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/document/9733186">State Estimation</a></li>
+          <li><a href="https://ieeexplore.ieee.org/document/10605082">Sensor Fusion</a></li>
+          <li><a href="">Motion Estimation</a></li>
+        </a></li>
+        </ul>
+      </td>
+  </tbody>
+</table>
+
 ## Supervised Learning or Unsupervised Learning?
 
 | **Methods** | **Supervised Learning** | **Unsupervised Learning** |
@@ -110,7 +171,7 @@ Please refer to [Installation](./docs/en/Installation.md)
 
 ## Citation
 
-If you find this repo useful, please cite our paper.
+If you find this repo useful, please cite our papers.
 
 ```bibtex
 @ARTICLE{10605082,
@@ -124,3 +185,5 @@ If you find this repo useful, please cite our paper.
   keywords={Training;Sensor fusion;Global Positioning System;Navigation;Vectors;Kalman filters;Wheels;Integrated navigation and localization;Kalman filter;recurrent neural networks;sensor fusion},
   doi={10.1109/LSP.2024.3431443}}
 ```
+
+Others
