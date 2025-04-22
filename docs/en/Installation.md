@@ -69,7 +69,7 @@
    and
 
    ```bash
-   cd filternetet
+   cd filternet
    ```
 
    Install this repo with pip.

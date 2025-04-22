@@ -10,6 +10,8 @@
 
 We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
 
+You can view papers related to Learning Inspired Filtering through the following [links](https://github.com/SongJgit/awesome-learning-aided-filter-papers).
+
 ## 🥳 What's New
 
 - Feb. 2025: 🌟🌟🌟 First commit. Added support for model-based Kalman filter, Extended Kalman filter, Interacting Multiple model, and learning-aided Kalman filtering KalmanNet, Split-KalmanNet.
@@ -167,7 +169,15 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 
 ### Installation
 
-Please refer to [Installation](./docs/en/Installation.md)
+Please refer to [Installation](./docs/en/Installation.md).
+
+### Supported Datasets
+
+Please refer to [Datasets](./docs/en/Datasets.md).
+
+### Training
+
+Please refer to [Training](./docs/en/Training.md).
 
 ## Citation
 
