@@ -10,7 +10,7 @@
 
 We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
 
-You can view papers related to Learning Inspired Filtering through the following [links](https://github.com/SongJgit/awesome-learning-aided-filter-papers).
+You can view papers related to Learning-Aided Filtering through the following [links](https://github.com/SongJgit/awesome-learning-aided-filter-papers).
 
 ## 🥳 What's New
 
