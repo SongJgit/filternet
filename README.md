@@ -238,3 +238,7 @@ If you find this repo useful, please cite our papers.
 ```
 
 Others
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SongJgit/filternet&type=Date)](https://www.star-history.com/#SongJgit/filternet&Date)
