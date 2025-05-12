@@ -190,13 +190,12 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 
 ### Lorenz Attractor
 
-For convenience, we directly use RMSE. The default parameters $q2 = 1e-4, r2 \\in {1, 10, 1000}$
+For convenience, we directly use RMSE. The default parameters $q^2 = 1e-4$, and $r^2 \\in {1, 10, 100, 1000}$.
 
-| Methods | RMSE@R1.0 | RMSE@R10.0 | RMSE@R100.0 |RMSE@R1000.0 |
+| Methods | RMSE@1 | RMSE@10| RMSE@100 |RMSE@1000|
 |:-------:|:---------:|:----------:|:-----------:|:-----------:|
 | **Obs Error** | 2.31 | 3.78| 10.26| 31.56 |
-| **KNetArch1** |0.60431 | 1.18635| 2.8958 | Nan|
-| **KNetArch2** |0.52114 | 0.94102| 2.48824 | 7.09247|
+| **KNet** |0.60431 | 1.18635| 2.8958 | Nan|
 | **SKNet** | 0.39873 | 0.91222| 2.01605 | 5.37797 |
 | **DANSE** | 0.59011|1.20016 | 3.11831 | 7.99238 |
 | **SIKNet**| 0.49095| 0.82325 | 2.03247 | 5.28136|
