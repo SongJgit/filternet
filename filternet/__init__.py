@@ -1,3 +1,4 @@
+__version__ = '0.1.0'
 from .datasets import *  # noqa: F403
 from .models import *  # noqa: F403
 from .param_schedulers import *  # noqa: F403

@@ -1,0 +1,95 @@
+# Overview:
+# This pyproject.toml file manages the build, packaging, and distribution of the Filternet library.
+# It defines essential project metadata, dependencies, and settings used to develop and deploy the library.
+
+# Key Sections:
+# - [build-system]: Specifies the build requirements and backend (e.g., setuptools, wheel).
+# - [project]: Includes details like name, version, description, authors, dependencies and more.
+# - [project.optional-dependencies]: Provides additional, optional packages for extended features.
+# - [tool.*]: Configures settings for various tools (pytest, yapf, etc.) used in the project.
+
+# Installation:
+# For development purposes, you can install the package in editable mode with: 'pip install -e .'
+# This approach allows for real-time code modifications without the need for re-installation.
+
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Project settings -----------------------------------------------------------------------------------------------------
+[project]
+name = "filternet"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.10"
+description = "A Learning-Aided Kalman filtering library for state estimation, Sensor Fusion, and Object Tracking."
+authors = [
+    {name = "Jian Song", email = "songj9507@outlook.com"}
+]
+keywords = ["machine-learning", "deep-learning", "Kalman filter", "state estimation", "sensor fusion", "ML", "DL", "AI", "KF" ]
+
+
+
+# Required dependencies ------------------------------------------------------------------------------------------------
+dependencies = [
+    "numpy>=1.23.0,<=2.1.1",
+    "matplotlib>=3.3.0",
+    "mmengine",
+    'wandb',
+    'pandas',
+    'numpy',
+    "torch>=1.8.0",
+    "torch>=1.8.0,!=2.4.0; sys_platform == 'win32'", # Windows CPU errors w/ 2.4.0 https://github.com/ultralytics/ultralytics/issues/15049
+    "torchvision>=0.9.0",
+    'pycocotools',
+    'faster-coco-eval',
+    'jax',
+    'torchmetrics',
+    'filterpy',
+    'einops'
+]
+
+# Tools settings -------------------------------------------------------------------------------------------------------
+[tool.setuptools]  # configuration specific to the `setuptools` build backend.
+packages = { find = { where = ["."], include = ["filternet", "filternet.*"] } }
+package-data = { "filternet" = ["**/*.yaml", "**/*.sh"], "filternet.assets" = ["*.jpg"] }
+
+[tool.setuptools.dynamic]
+version = { attr = "filternet.__version__" }
+
+[tool.isort]
+line_length = 120
+multi_line_output = 0
+
+[tool.yapf]
+based_on_style = "pep8"
+spaces_before_comment = 2
+column_limit = 120
+coalesce_brackets = true
+spaces_around_power_operator = true
+space_between_ending_comma_and_closing_bracket = true
+split_before_closing_bracket = false
+split_before_first_argument = false
+
+[tool.ruff]
+line-length = 120
+lint.select = ["E", "F"]
+lint.ignore = ["E266", "F401"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.docformatter]
+wrap-summaries = 120
+wrap-descriptions = 120
+pre-summary-newline = true
+close-quotes-on-newline = true
+in-place = true
+
+[tool.codespell]
+ignore-words-list = "create,nd,ned,strack,dota,ane,segway,fo,gool,winn,commend,bloc,nam,afterall,EDN,edn,warmup,WARMUP,MOT,mot,SIE,sie,MAPE,mape,Bu"
+skip = '*.pt,*.pth,*.torchscript,*.onnx,*.tflite,*.pb,*.bin,*.param,*.mlmodel,*.engine,*.npy,*.data*,*.csv,*pnnx*,*venv*,*translat*,__pycache__*,*.ico,*.jpg,*.png,*.mp4,*.mov,/runs,/.git,./docs/??/*.md,./docs/mkdocs_??.yml'

@@ -1,22 +1,9 @@
 repos:
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.1
-    hooks:
-      - id: flake8
-        args:
-          - --per-file-ignores= __init__.py:F401
-          - --max-line-length=120
-          - --ignore=E266,W504
-          - --exclude=configs/*, datasets_tools/*
   - repo: https://github.com/pre-commit/mirrors-yapf
     rev: v0.32.0
     hooks:
       - id: yapf
-  # - repo: https://github.com/PyCQA/isort
-  #   rev: 5.11.5
-  #   hooks:
-  #     - id: isort
-  #       args: ["--extend-skip-glob=configs/*"]
+        additional_dependencies: [toml]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -34,7 +21,7 @@ repos:
     rev: v2.3.0
     hooks:
       - id: codespell
-        args: ["--ignore-words", ".codespellignore.txt", "--skip", "*.ipynb"]
+        additional_dependencies: [tomli]
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.19
     hooks:
@@ -48,3 +35,8 @@ repos:
     hooks:
       - id: docformatter
         args: ["--in-place", "--wrap-descriptions", "120"]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.8
+    hooks:
+    -   id: ruff
+        args: [--exit-non-zero-on-fix]
