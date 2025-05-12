@@ -203,12 +203,12 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 
 ### NCLT Sensor Fusion
 
-| Methods | RMSE |
-| :\----------: | :---- :|
-| **EKF** | |
-| **KNet** | |
-| **SKNet** | |
-| **SIKNet** | |
+|  Methods   | RMSE |
+| :--------: | :--: |
+|  **EKF**   |      |
+|  **KNet**  |      |
+| **SKNet**  |      |
+| **SIKNet** |      |
 
 ## Getting Started
 
