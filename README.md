@@ -191,6 +191,7 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 ### Lorenz Attractor
 
 For convenience, we directly use RMSE. The default parameters $q^2 = 1e-4$, and $r^2 \in \{1, 10, 100, 1000\}$.
+Note: In order to compare with other models, DANSE is trained using a supervised method from the source code.
 
 |    Methods    | RMSE@1  | RMSE@10 | RMSE@100 | RMSE@1000 |
 | :-----------: | :-----: | :-----: | :------: | :-------: |
@@ -202,12 +203,12 @@ For convenience, we directly use RMSE. The default parameters $q^2 = 1e-4$, and 
 
 ### NCLT Sensor Fusion
 
-| Methods    | RMSE |
-| ---------- | ---- |
-| **EKF**    |      |
-| **KNet**   |      |
-| **SKNet**  |      |
-| **SIKNet** |      |
+| Methods | RMSE |
+| :\----------: | :---- :|
+| **EKF** | |
+| **KNet** | |
+| **SKNet** | |
+| **SIKNet** | |
 
 ## Getting Started
 
