@@ -22,6 +22,7 @@ repos:
     hooks:
       - id: codespell
         additional_dependencies: [tomli]
+
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.19
     hooks:
@@ -30,6 +31,7 @@ repos:
         additional_dependencies:
           - mdformat_frontmatter
           - linkify-it-py
+          - mdformat-myst
   - repo: https://github.com/myint/docformatter
     rev: v1.3.1
     hooks:

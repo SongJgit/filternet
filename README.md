@@ -161,53 +161,53 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 
 ## Abbrv
 
-| **Method** | **Abbrv Name** |
-|:-------------------:|:-----------------------:|
-| **KNet** | KalmanNet|
-| **SKNet** | Split-KalmanNet|
-| **DANSE** | DANSE |
+| **Method** |         **Abbrv Name**         |
+| :--------: | :----------------------------: |
+|  **KNet**  |           KalmanNet            |
+| **SKNet**  |        Split-KalmanNet         |
+| **DANSE**  |             DANSE              |
 | **SIKNet** | Semantic-Independent KalmanNet |
 
 ## Supervised Learning or Unsupervised Learning?
 
 | **Methods** | **Supervised Learning** | **Unsupervised Learning** |
-|:-------------------:|:-----------------------:|:-------------------------:|
-| **KNet** | ✔ | ✔ |
-| **SKNet** | ✔ | ✔ |
-| **DANSE** | ✔ | ✔ |
-| **SIKNet** | ✔ | ✔ |
+| :---------: | :---------------------: | :-----------------------: |
+|  **KNet**   |            ✔            |             ✔             |
+|  **SKNet**  |            ✔            |             ✔             |
+|  **DANSE**  |            ✔            |             ✔             |
+| **SIKNet**  |            ✔            |             ✔             |
 
 ## BenchMark
 
 ### Motion Estimation in MOT Datasets
 
-| Methods | Recall@50 | Recall@75 | Recall@50:95 |
-|:-------------------------------:|:-----------:|:-----------:|:--------------:|
-| **KF** | | | |
-| **KNet** | | | |
-| **SKNet** | | | |
-| **SIKNet** | | | |
+|  Methods   | Recall@50 | Recall@75 | Recall@50:95 |
+| :--------: | :-------: | :-------: | :----------: |
+|   **KF**   |           |           |              |
+|  **KNet**  |           |           |              |
+| **SKNet**  |           |           |              |
+| **SIKNet** |           |           |              |
 
 ### Lorenz Attractor
 
-For convenience, we directly use RMSE. The default parameters $q^2 = 1e-4$, and $r^2 \\in {1, 10, 100, 1000}$.
+For convenience, we directly use RMSE. The default parameters $q^2 = 1e-4$, and $r^2 \in \{1, 10, 100, 1000\}$.
 
-| Methods | RMSE@1 | RMSE@10| RMSE@100 |RMSE@1000|
-|:-------:|:---------:|:----------:|:-----------:|:-----------:|
-| **Obs Error** | 2.31 | 3.78| 10.26| 31.56 |
-| **KNet** |0.60431 | 1.18635| 2.8958 | Nan|
-| **SKNet** | 0.39873 | 0.91222| 2.01605 | 5.37797 |
-| **DANSE** | 0.59011|1.20016 | 3.11831 | 7.99238 |
-| **SIKNet**| 0.49095| 0.82325 | 2.03247 | 5.28136|
+|    Methods    | RMSE@1  | RMSE@10 | RMSE@100 | RMSE@1000 |
+| :-----------: | :-----: | :-----: | :------: | :-------: |
+| **Obs Error** |  2.31   |  3.78   |  10.26   |   31.56   |
+|   **KNet**    | 0.60431 | 1.18635 |  2.8958  |    Nan    |
+|   **SKNet**   | 0.39873 | 0.91222 | 2.01605  |  5.37797  |
+|   **DANSE**   | 0.59011 | 1.20016 | 3.11831  |  7.99238  |
+|  **SIKNet**   | 0.49095 | 0.82325 | 2.03247  |  5.28136  |
 
 ### NCLT Sensor Fusion
 
-| Methods | RMSE |
-|-----------|------|
-| **EKF** | |
-| **KNet** | |
-| **SKNet** | |
-| **SIKNet** | |
+| Methods    | RMSE |
+| ---------- | ---- |
+| **EKF**    |      |
+| **KNet**   |      |
+| **SKNet**  |      |
+| **SIKNet** |      |
 
 ## Getting Started
 
