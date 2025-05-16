@@ -5,6 +5,7 @@ __pycache__
 weights
 DATA
 data/*
+!data/nclt_fusion/*.pt
 filternet.egg-info/
 .vscode
 outputs/
