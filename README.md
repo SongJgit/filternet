@@ -217,13 +217,13 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 
 - [WandB Logger](https://wandb.ai/songj/NCLT_Fusion_Benchmark?nw=nwusersongj).
 
-- $\mathrm{AvgRMSE@All} = Average(\mathrm{RMSE@Traj1}, \mathrm{RMSE@Traj2}, \cdots, \mathrm{RMSE@TrajN})$.
+- $\mathrm{AvgRMSE}\text{@} \mathrm{All} = Average(\mathrm{RMSE}\text{@}\mathrm{Traj1}, \mathrm{RMSE}\text{@}\mathrm{Traj2}, \cdots, \mathrm{RMSE}\text{@}\mathrm{Traj3})$.
 
-- $\mathrm{RMSE@All} = RMSE(\mathrm{Traj1}, \mathrm{Traj2}, \cdots, \mathrm{TrajN})$.
+- $\mathrm{RMSE}\text{@}\mathrm{All} = RMSE(\mathrm{Traj1}, \mathrm{Traj2}, \cdots, \mathrm{TrajN})$.
 
 <table style="border-collapse: collapse; border: none; border-spacing: 0px;" align="center">
 	<tr>
-		<td colspan="2" style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td colspan="2" style="border-top: 2px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			<b>Metric</b>
 		</td>
 		<td style="border-top: 2px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
@@ -246,34 +246,34 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Methods</b>
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			<b>Methods&nbsp; </b>
 		</td>
-		<td style="padding-right: 3pt; padding-left: 3pt; background-image: linear-gradient(to right top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 49.9%, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 51%, rgba(255, 255, 255, 0) 51.1%, rgba(255, 255, 255, 0) 100%);">
-			<div style="padding-left: 50px;word-break: keep-all;white-space: nowrap;">
-				<b>Traj.Len[Sec]</b>
-			</div>
-			<div style="padding-right:50px;word-break: keep-all;white-space: nowrap;">
-				<b>Params</b>
-			</div>
+		<td style="border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			<b>Traj.Len[S]</b>
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			4834
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			4917
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			4182
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
 		</td>
-		<td style="border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+		<td rowspan="2" style="border-top: 1px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
+		</td>
+	</tr>
+	<tr>
+		<td style="border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			<b>Params</b>
 		</td>
 	</tr>
 	<tr>
@@ -310,48 +310,48 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 			-
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		117.76
+			117.76
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		81.61
+			81.61
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		83.99
+			83.99
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		94.46
-		</td>
-		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		-
-		</td>
-		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		-
-		</td>
-	</tr>
-		<tr>
-		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS EKF</b>
+			94.46
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		18.76
+			-
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			<b>Wheels-GPS EKF</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		12.29
+			<b>-</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		8.94
+			18.76
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		13.33
+			12.29
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		-
+			8.94
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		-
+			13.33
+		</td>
+		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			-
+		</td>
+		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			-
 		</td>
 	</tr>
 	<tr>
@@ -362,22 +362,22 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 			1.3 M
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		15.520
+			15.520
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		7.806
+			7.806
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		7.087
+			7.087
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.137
+			10.137
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.961
+			10.961
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-	    <a href="./configs/nclt_fusion/knet_arch1.py">config</a>
+			<a href="./configs/nclt_fusion/knet_arch1.py">config</a>
 		</td>
 	</tr>
 	<tr>
@@ -388,22 +388,22 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 			107 K
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		14.899
+			14.899
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		8.916
+			8.916
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		8.490
+			8.490
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.768
+			10.768
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		11.256
+			11.256
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		<a href="./configs/nclt_fusion/knet_arch2.py">config</a>
+			<a href="./configs/nclt_fusion/knet_arch2.py">config</a>
 		</td>
 	</tr>
 	<tr>
@@ -414,22 +414,22 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 			463 K
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		16.105
+			16.105
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.037
+			10.037
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		6.532
+			6.532
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.891
+			10.891
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		11.762
+			11.762
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		<a href="./configs/nclt_fusion/sknet.py">config</a>
+			<a href="./configs/nclt_fusion/sknet.py">config</a>
 		</td>
 	</tr>
 	<tr>
@@ -439,19 +439,23 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			453 K
 		</td>
-		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">14.434
-		</td>
-		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">7.687
-		</td>
-		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">5.999
-		</td>
-		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">9.374
+		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			14.434
 		</td>
 		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		10.399
+			7.687
 		</td>
 		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
-		<a href="./configs/nclt_fusion/siknet.py">config</a>
+			5.999
+		</td>
+		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			9.374
+		</td>
+		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			10.399
+		</td>
+		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
+			<a href="./configs/nclt_fusion/siknet.py">config</a>
 		</td>
 	</tr>
 </table>
