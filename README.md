@@ -417,7 +417,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
         <b>W-G SKNet</b>
       </td>
       <td>
-        107 K
+        463 K
 		</td>
       <td>
         16.105
