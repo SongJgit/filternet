@@ -30,50 +30,9 @@
   conda activate filternet
   ```
 
-2. Install Pytorch and Lightning.
-
-- Best practice
-
-  pytorch
-
-  ```bash
-  conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=12.1 -c pytorch -c nvidia
-  ```
-
-  lightning
-
-  ```bash
-  pip install lightning==2.3.0
-  ```
-
-- or at least
-
-  pytorch
-
-  ```bash
-  pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
-  ```
-
-  lightning
-
-  ```bash
-  pip install lightning==1.9.0
-  ```
-
-3. Install this repo.
-
+2. Install this repo
    ```bash
    git clone git@github.com:SongJgit/filternet.git
-   ```
-
-   and
-
-   ```bash
    cd filternet
-   ```
-
-   Install this repo with pip.
-
-   ```bash
    pip install -e .
    ```
