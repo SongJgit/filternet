@@ -76,7 +76,7 @@ split_before_first_argument = false
 line-length = 120
 lint.select = ["E", "F"]
 lint.ignore = ["E266", "F401"]
-
+exclude = ['*.ipynb']
 [tool.ruff.format]
 docstring-code-format = true
 
@@ -91,5 +91,5 @@ close-quotes-on-newline = true
 in-place = true
 
 [tool.codespell]
-ignore-words-list = "create,nd,ned,strack,dota,ane,segway,fo,gool,winn,commend,bloc,nam,afterall,EDN,edn,warmup,WARMUP,MOT,mot,SIE,sie,MAPE,mape,Bu"
-skip = '*.pt,*.pth,*.torchscript,*.onnx,*.tflite,*.pb,*.bin,*.param,*.mlmodel,*.engine,*.npy,*.data*,*.csv,*pnnx*,*venv*,*translat*,__pycache__*,*.ico,*.jpg,*.png,*.mp4,*.mov,/runs,/.git,./docs/??/*.md,./docs/mkdocs_??.yml'
+ignore-words-list = "create,nd,ned,strack,dota,ane,segway,fo,gool,winn,commend,bloc,nam,afterall,EDN,edn,warmup,WARMUP,MOT,mot,SIE,sie,MAPE,mape, Bu"
+skip = '*.pt,*.pth,*.torchscript,*.onnx,*.tflite,*.pb,*.bin,*.param,*.mlmodel,*.engine,*.npy,*.data*,*.csv,*pnnx*,*venv*,*translat*,__pycache__*,*.ico,*.jpg,*.png,*.mp4,*.mov,/runs,/.git,./docs/??/*.md,./docs/mkdocs_??.yml,*.ipynb'
