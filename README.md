@@ -221,6 +221,8 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 
 - $\mathrm{RMSE}\text{@}\mathrm{All} = RMSE(\mathrm{Traj1}, \mathrm{Traj2}, \cdots, \mathrm{TrajN})$.
 
+- G-O means GPS-Only, W-O means Wheel-Only, and W-G means GPS-Wheel.
+
 <table style="border-collapse: collapse; border: none; border-spacing: 0px;" align="center">
 	<tr>
 		<td colspan="2" style="border-top: 2px solid rgb(0, 0, 0); border-bottom: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
@@ -278,7 +280,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>GPS-Only</b>
+			<b>G-O</b>
 		</td>
 		<td style="border-top: 1px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
@@ -304,7 +306,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-Only EKF</b>
+			<b>W-O EKF</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			-
@@ -330,7 +332,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS EKF</b>
+			<b>W-G EKF</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			<b>-</b>
@@ -356,7 +358,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS KNetArch1</b>
+			<b>W-G KNetArch1</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			1.3 M
@@ -382,7 +384,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS KNetArch2</b>
+			<b>W-G KNetArch2</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			107 K
@@ -408,7 +410,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS SKNet</b>
+			<b>W-G SKNet</b>
 		</td>
 		<td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			463 K
@@ -434,7 +436,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 	</tr>
 	<tr>
 		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
-			<b>Wheels-GPS SIKNet</b>
+			<b>W-G SIKNet</b>
 		</td>
 		<td style="border-bottom: 2px solid rgb(0, 0, 0); text-align: center; padding-right: 3pt; padding-left: 3pt;">
 			453 K
