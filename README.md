@@ -221,7 +221,7 @@ Note: In order to compare with other models, DANSE is trained using a supervised
 
 - $\mathrm{RMSE}\text{@}\mathrm{All} = RMSE(\mathrm{Traj1}, \mathrm{Traj2}, \cdots, \mathrm{TrajN})$.
 
-- G-O means GPS-Only, W-O means Wheel-Only, and W-G means GPS-Wheel.
+- G-O means GPS-Only, W-O means Wheel-Only, and W-G means Wheel-GPS.
 
 <table style="border-collapse: collapse; border: none; border-spacing: 0px;" align="center">
 	<tr>
