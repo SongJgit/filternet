@@ -1,6 +1,6 @@
 ## Data Preprocessing
 
-1. We have provided preprocessed dataset in the `./data/nclt_fusion`(consistent with the [paper](#anchor3)).
+1. We have provided preprocessed dataset in the `./data/nclt_fusion`.
 2. If you want to re-download the data and process it, use the following steps
 
 ```

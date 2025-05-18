@@ -197,17 +197,19 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 
 - For convenience, we directly use RMSE.
 - The default parameters $q^2 = 1e-4$, and $r^2 \in \{1, 10, 100, 1000\}$.
-- system state dimension: $m = 3$, observation dimension: $n = 3$.
+- System state dimension: $m = 3$, observation dimension: $n = 3$.
+- [More details](configs/lorenz/README.md).
+- [WandB Logger](https://wandb.ai/songj/Lorenz_benchmark). It needs to be viewed in groups。
 
 Note: In order to compare with other models, DANSE is trained using a supervised method from the source code.
 
-|    Methods    | Params | RMSE@1  | RMSE@10 | RMSE@100 | RMSE@1000 |
-| :-----------: | :----: | :-----: | :-----: | :------: | :-------: |
-| **Obs Error** |  None  |  2.31   |  3.78   |  10.26   |   31.56   |
-|   **KNet**    | 366 K  | 0.60431 | 1.18635 |  2.8958  |    Nan    |
-|   **SKNet**   | 149 K  | 0.39873 | 0.91222 | 2.01605  |  5.37797  |
-|   **DANSE**   | 4.3 K  | 0.59011 | 1.20016 | 3.11831  |  7.99238  |
-|  **SIKNet**   | 140 K  | 0.49095 | 0.82325 | 2.03247  |  5.28136  |
+|    Methods    | Params | RMSE@1  | RMSE@10 | RMSE@100 | RMSE@1000 |                 Config                 |
+| :-----------: | :----: | :-----: | :-----: | :------: | :-------: | :------------------------------------: |
+| **Obs Error** |  None  |  2.31   |  3.78   |  10.26   |   31.56   |                  None                  |
+|   **KNet**    | 366 K  | 0.60431 | 1.18635 |  2.8958  |    Nan    | [config](configs/lorenz/knet_arch2.py) |
+|   **SKNet**   | 149 K  | 0.39873 | 0.91222 | 2.01605  |  5.37797  |   [config](configs/lorenz/sknet.py)    |
+|   **DANSE**   | 4.3 K  | 0.59011 | 1.20016 | 3.11831  |  7.99238  |   [config](configs/lorenz/danse.py)    |
+|  **SIKNet**   | 140 K  | 0.49095 | 0.82325 | 2.03247  |  5.28136  |   [config](configs/lorenz/siknet.py)   |
 
 ### NCLT Sensor Fusion
 
