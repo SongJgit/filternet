@@ -1,12 +1,12 @@
+<h1 align="center">FilterNet - Learning-Aided Filtering in Python</h1>
+<h3 align="center">Welcome to FilterNet</h3>
 <p align="center">
 <a href="https://github.com/pre-commit/pre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" alt="pre-commit" style="max-width:100%;"></a>
 <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;"></a>
     <a href=""><img src="https://img.shields.io/badge/python-3.10+-aff.svg"></a>
     <a href=""><img src="https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg"></a>
-
+  <a href=""><img alt="powered by Pytorch" src="https://img.shields.io/badge/PyTorch-v1.8+-E97040?logo=pytorch&logoColor=white"></a>
 </p>
-
-# FilterNet - Learning-Aided Filtering in Python
 
 ## Notice
 
@@ -16,7 +16,8 @@ You can view papers related to Learning-Aided Filtering through the following [l
 
 ## 🥳 What's New
 
-- Feb. 2025: 🌟🌟🌟 First commit. Added support for model-based Kalman filter, Extended Kalman filter, Interacting Multiple model, and learning-aided Kalman filtering KalmanNet, Split-KalmanNet.
+- Feb. 2025: 🌟🌟🌟🌟🌟 Add NCLT Fusion task benchmark (with WandB logger), Lorenz Attractor benchmark (with WandB logger).
+- Feb. 2025: 🌟🌟🌟 First commit. Added support for model-based Kalman filter, Extended Kalman filter, Interacting Multiple model, and learning-aided Kalman filtering KalmanNet, Split-KalmanNet, DANSE.
 
 ## Introduction
 
@@ -25,6 +26,26 @@ It contains Kalman filters, Extended Kalman filters, KalmanNet, Split-KalmanNet,
 This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs/pytorch/stable/)**, **[MMEngine](https://github.com/open-mmlab/mmengine)**, and **[WandB](https://wandb.ai/site)**.
 
 ## Highlights
+
+### Learning-Aided Kalman Filtering
+
+- **Unified data structure**
+
+  Now that Learning-Aided Kalman Filtering paper implementations have their own characteristics, which makes comparing algorithms very difficult, we use a unified data structure for the supported algorithms here, so that the user only needs to change the Datasets to seamlessly compare the algorithms.
+
+- **Multiple tasks supported**
+
+  Facilitates users to compare the performance of your own algorithms on different tasks, such as Lorenz Attractor, NCLT Fusion task, NCLT Estimation, and Motion Estimation, etc.
+
+- **Easy to develop your own models**
+
+  Many basic modules have been implemented, e.g. CV, CA modeling, etc., which can be easily extended to your own models.
+
+- **Support for multiple GPUs and Batches**
+
+  The code supports multi-GPU as well as mini-batch training (not supported by earlier versions of many papers, e.g. KalmanNet and DANSE).
+
+### Advanced Features
 
 - **[Pytorch-Lightning](https://lightning.ai/docs/pytorch/stable/)**
 
@@ -45,6 +66,8 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
   We use [WandB](https://wandb.ai/site) to visualize the training log.
   **Pytorch-Lightning** supports a variety of loggers, such as **tensorboard** and **wandb**, but in this project, we use **wandb** as the default logger because it is very easy to share training logs, as well as very easy for multiple people to collaborate.
   In the future, we will share the logs of all models in **wandb**, so that you can easily view and compare the performance and convergence speed of different models.
+
+-
 
 ## Model Zoo
 
@@ -502,6 +525,13 @@ If you find this repo useful, please cite our papers.
 ```
 
 Others
+
+## Acknowledgement
+
+The structure of this repository and much of the code is thanks to the authors of the following repositories.
+
+- [filterpy](https://github.com/rlabbe/filterpy): A really great (I think the best) python based filter repository. Also has a filter [teaching repository](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python) with it.
+- [torchfilter](https://github.com/stanford-iprl-lab/torchfilter): Is a library for discrete-time Bayesian filtering in PyTorch. By writing filters as standard PyTorch modules.
 
 ## Star History
 
