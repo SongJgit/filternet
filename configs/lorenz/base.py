@@ -4,16 +4,17 @@ from filternet.params import LorenzParams
 
 q2 = '0.0001'
 r2 = '1000.0'
-date = '25050716'
-
-if r2 == '1.0':
+date = '25052216'
+if r2 == '0.1':
+    rmse = '2.11'
+elif r2 == '1.0':
     rmse = '2.31'
 elif r2 == '10.0':
     rmse = '3.78'
 elif r2 == '100.0':
     rmse = '10.26'
 elif r2 == '1000.0':
-    rmse = '31.56'
+    rmse = '31.55'
 
 data_path = f'./data/lorenz_data/{date}/LorenzSSM_3x3_T100_N1000_q2_{q2}_r2_{r2}_TestObsRMSE{rmse}.pkl'
 project = f'LorenzSSM_3x3_T100_N1000_q2_{q2}_r2_{r2}_TestObsRMSE{rmse}'

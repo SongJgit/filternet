@@ -4,7 +4,7 @@ T=100
 n_states=3
 n_obs=3
 dataset_type="LorenzSSM"
-script_name="datasets_tools/lorenz_datasets/gen_data.py"
+script_name="datasets_tools/synthetic_datasets/gen_data.py"
 output_path="data/lorenz_data/"
 
 
@@ -12,7 +12,7 @@ q2=0.0001
 
 
 
-for r2 in 1 10 100 1000
+for r2 in 0.1 1 10 100 1000
 do
     ${PYTHON} ${script_name} \
     --n_states ${n_states} \

@@ -5,10 +5,10 @@
 import numpy as np
 import math
 import torch
-from utils import dB_to_lin
 from scipy.integrate import solve_ivp
 
 
+# TODO: Modify to use the q2 and r2 parameters
 class LinearSSM(object):
     """This class defines the Linear state space model (LinearSSM).
 
@@ -17,30 +17,30 @@ class LinearSSM(object):
     reasons using parameters like `beta`. Typically simulated without a driving input.
     """
 
-    def __init__(self, n_states, n_obs, mu_e=None, mu_w=None, gamma=0.8, beta=1.0, drive_noise=False):
+    def __init__(self, n_states, n_obs, mean_q=None, mean_r=None, gamma=0.8, beta=1.0, drive_noise=False):
 
         self.n_states = n_states
         self.n_obs = n_obs
         self.gamma = gamma
         self.beta = beta
-        if mu_e is not None:
-            self.mu_e = mu_e
+        if mean_q is not None:
+            self.mean_q = mean_q
         else:
-            self.mu_e = np.zeros((self.n_states, ))
-        if mu_w is not None:
-            self.mu_w = mu_w
+            self.mean_q = np.zeros((self.n_states, ))
+        if mean_r is not None:
+            self.mean_r = mean_r
         else:
-            self.mu_w = np.zeros((self.n_obs, ))
-        self.mu_w = mu_w
+            self.mean_r = np.zeros((self.n_obs, ))
+        self.mean_r = mean_r
         self.drive_noise = drive_noise
         self.construct_F()
         self.construct_H()
 
-    def setStateCov(self, sigma_e2):
-        self.Ce = sigma_e2 * np.eye(self.n_states)
+    def setStateCov(self, q2):
+        self.cov_q = q2 * np.eye(self.n_states)
 
-    def setMeasurementCov(self, sigma_w2):
-        self.Cw = sigma_w2 * np.eye(self.n_obs)
+    def setMeasurementCov(self, r2):
+        self.cov_r = r2 * np.eye(self.n_obs)
 
     def construct_F(self):
         self.F = np.eye(self.n_states) + np.concatenate(
@@ -70,13 +70,13 @@ class LinearSSM(object):
             u_k = np.cos(a * (k + 1) + np.random.normal(loc=0, scale=np.pi, size=(1, 1)))  # Adding noise to the sample
         return u_k
 
-    def generate_state_sequence(self, T, sigma_e2_dB):
+    def generate_state_sequence(self, T, q2):
 
         self.G = np.ones((self.n_states, 1))
-        self.sigma_e2 = dB_to_lin(sigma_e2_dB)
-        self.setStateCov(sigma_e2=self.sigma_e2)
+        self.q2 = q2
+        self.setStateCov(q2=self.q2)
         x_arr = np.zeros((T + 1, self.n_states))
-        e_k_arr = np.random.multivariate_normal(self.mu_e, self.Ce, size=(T + 1, ))
+        e_k_arr = np.random.multivariate_normal(self.mean_q, self.cov_q, size=(T + 1, ))
 
         # Generate the sequence iteratively
         for k in range(T):
@@ -97,15 +97,13 @@ class LinearSSM(object):
 
         return x_arr
 
-    def generate_measurement_sequence(self, x_arr, T, smnr_dB=10.0):
-
-        signal_p = np.var(np.einsum('ij,nj->ni', self.H, x_arr))
-        self.sigma_w2 = signal_p / dB_to_lin(smnr_dB)
-        self.setMeasurementCov(sigma_w2=self.sigma_w2)
+    def generate_measurement_sequence(self, x_arr, T, r2):
+        self.r2 = r2
+        self.setMeasurementCov(r2=self.r2)
         y_arr = np.zeros((T, self.n_obs))
 
-        #print("sigma_w2: {}".format(self.sigma_w2))
-        w_k_arr = np.random.multivariate_normal(self.mu_w, self.Cw, size=(T, ))
+        #print("r2: {}".format(self.r2))
+        w_k_arr = np.random.multivariate_normal(self.mean_r, self.cov_r, size=(T, ))
 
         #print(self.H.shape, x_arr.shape, y_arr.shape)
         # Generate the sequence iteratively
@@ -117,9 +115,9 @@ class LinearSSM(object):
 
         return y_arr
 
-    def generate_single_sequence(self, T, sigma_e2_dB, smnr_dB):
+    def generate_single_sequence(self, T, q2, smnr_dB):
 
-        x_arr = self.generate_state_sequence(T=T, sigma_e2_dB=sigma_e2_dB)
+        x_arr = self.generate_state_sequence(T=T, q2=q2)
         y_arr = self.generate_measurement_sequence(x_arr=x_arr, T=T, smnr_dB=smnr_dB)
 
         return x_arr, y_arr
@@ -144,8 +142,8 @@ class LorenzSSM(object):
                  delta_d,
                  alpha=0.0,
                  decimate=False,
-                 mu_e=None,
-                 mu_w=None,
+                 mean_q=None,
+                 mean_r=None,
                  H=None,
                  use_Taylor=True) -> None:
 
@@ -156,12 +154,12 @@ class LorenzSSM(object):
         self.delta_d = delta_d
         self.n_obs = n_obs
         self.decimate = decimate
-        self.mu_e = mu_e
+        self.mean_q = mean_q
         if H is None:
             self.H = np.eye(self.n_obs)
         else:
             self.H = H
-        self.mu_w = mu_w
+        self.mean_r = mean_r
         self.use_Taylor = use_Taylor
 
     def A_fn(self, z):
@@ -202,18 +200,18 @@ class LorenzSSM(object):
 
         return self.F @ x
 
-    def setStateCov(self, sigma_e2=0.1):
-        self.Ce = sigma_e2 * np.eye(self.n_states)
+    def setStateCov(self, q2=0.1):
+        self.cov_q = q2 * np.eye(self.n_states)
 
-    def setMeasurementCov(self, sigma_w2=1.0):
-        self.Cw = sigma_w2 * np.eye(self.n_obs)
+    def setMeasurementCov(self, r2=1.0):
+        self.cov_r = r2 * np.eye(self.n_obs)
 
     def generate_state_sequence(self, T, q2):
 
-        self.sigma_e2 = q2
-        self.setStateCov(sigma_e2=self.sigma_e2)
+        self.q2 = q2
+        self.setStateCov(q2=self.q2)
         x_lorenz = np.zeros((T + 1, self.n_states))
-        e_k_arr = np.random.multivariate_normal(self.mu_e, self.Ce, size=(T + 1, ))
+        e_k_arr = np.random.multivariate_normal(self.mean_q, self.cov_q, size=(T + 1, ))
 
         for t in range(0, T):
             x_lorenz[t + 1] = self.f_linearize(x_lorenz[t]) + e_k_arr[t]
@@ -229,12 +227,12 @@ class LorenzSSM(object):
     def generate_measurement_sequence(self, x_lorenz, T, r2):
 
         #signal_p = ((self.h_fn(x_lorenz) - np.zeros_like(x_lorenz))**2).mean()
-        self.sigma_w2 = r2
-        self.setMeasurementCov(sigma_w2=self.sigma_w2)
-        w_k_arr = np.random.multivariate_normal(self.mu_w, self.Cw, size=(T, ))
+        self.r2 = r2
+        self.setMeasurementCov(r2=self.r2)
+        w_k_arr = np.random.multivariate_normal(self.mean_r, self.cov_r, size=(T, ))
         y_lorenz = np.zeros((T, self.n_obs))
 
-        #print("smnr: {}, signal power: {}, sigma_w: {}".format(smnr_dB, signal_p, self.sigma_w2))
+        #print("smnr: {}, signal power: {}, sigma_w: {}".format(smnr_dB, signal_p, self.r2))
 
         #print(self.H.shape, x_lorenz.shape, y_lorenz.shape)
         for t in range(0, T):
@@ -256,7 +254,7 @@ class LorenzSSM(object):
         return x_lorenz, y_lorenz
 
 
-def L96(t, x, N=20, F_mu=8, sigma_e2=.1):
+def L96(t, x, N=20, F_mu=8, q2=.1):
     """Lorenz 96 model with constant forcing Adapted from:
 
     https://www.wikiwand.com/en/Lorenz_96_model.
@@ -264,13 +262,14 @@ def L96(t, x, N=20, F_mu=8, sigma_e2=.1):
     # Setting up vector
     d = np.zeros(N)
     # Loops over indices (with operations and Python underflow indexing handling edge cases)
-    F_N = np.random.normal(loc=F_mu, scale=np.sqrt(sigma_e2), size=(N, ))
+    F_N = np.random.normal(loc=F_mu, scale=np.sqrt(q2), size=(N, ))
     for i in range(N):
         #print(F_N[i])
         d[i] = (x[(i + 1) % N] - x[i - 2]) * x[i - 1] - x[i] + F_N[i]
     return d
 
 
+# TODO: Modify to use the q2 and r2 parameters
 class Lorenz96SSM(object):
     """This class defines the state space model for the high-dimensional
     Lorenz-96 attractor (Lorenz96SSM).
@@ -287,7 +286,7 @@ class Lorenz96SSM(object):
                  delta_d,
                  F_mu=8,
                  decimate=False,
-                 mu_w=None,
+                 mean_r=None,
                  H=None,
                  method='RK45') -> None:
 
@@ -301,7 +300,7 @@ class Lorenz96SSM(object):
             self.H = np.eye(self.n_obs)
         else:
             self.H = H
-        self.mu_w = mu_w
+        self.mean_r = mean_r
         self.method = method
 
     def h_fn(self, x):
@@ -314,15 +313,15 @@ class Lorenz96SSM(object):
             y_ = np.einsum('ij,nj->ni', self.H, x)
         return y_
 
-    def setStateCov(self, sigma_e2=0.1):
-        self.Ce = sigma_e2 * np.eye(self.n_states)
+    def setStateCov(self, q2=0.1):
+        self.cov_q = q2 * np.eye(self.n_states)
 
-    def setMeasurementCov(self, sigma_w2=1.0):
-        self.Cw = sigma_w2 * np.eye(self.n_obs)
+    def setMeasurementCov(self, r2=1.0):
+        self.cov_r = r2 * np.eye(self.n_obs)
 
-    def generate_state_sequence(self, T_time, sigma_e2_dB):
+    def generate_state_sequence(self, T_time, q2):
 
-        self.sigma_e2 = dB_to_lin(sigma_e2_dB)
+        self.q2 = q2
         x0 = self.F_mu * np.ones(self.n_states)  # Initial state (equilibrium)
         x0[0] += self.delta  # Add small perturbation to the first variable
         sol = solve_ivp(L96,
@@ -331,7 +330,7 @@ class Lorenz96SSM(object):
                         args=(
                             self.n_states,
                             self.F_mu,
-                            self.sigma_e2,
+                            self.q2,
                         ),
                         method=self.method,
                         t_eval=np.arange(0.0, T_time, self.delta),
@@ -350,17 +349,16 @@ class Lorenz96SSM(object):
 
         return x_lorenz_d
 
-    def generate_measurement_sequence(self, T, x_lorenz, smnr_dB=10.0):
+    def generate_measurement_sequence(self, T, x_lorenz, r2=10.0):
 
         #signal_p = ((self.h_fn(x_lorenz) - np.zeros_like(x_lorenz))**2).mean()
-        signal_p = np.var(self.h_fn(x_lorenz))
         #print("Signal power: {:.3f}".format(signal_p))
-        self.sigma_w2 = signal_p / dB_to_lin(smnr_dB)
-        self.setMeasurementCov(sigma_w2=self.sigma_w2)
-        w_k_arr = np.random.multivariate_normal(self.mu_w, self.Cw, size=(T, ))
+        self.r2 = r2
+        self.setMeasurementCov(r2=self.r2)
+        w_k_arr = np.random.multivariate_normal(self.mean_r, self.cov_r, size=(T, ))
         y_lorenz = np.zeros((T, self.n_obs))
 
-        #print("smnr: {}, signal power: {}, sigma_w: {}".format(smnr_dB, signal_p, self.sigma_w2))
+        #print("smnr: {}, signal power: {}, sigma_w: {}".format(smnr_dB, signal_p, self.r2))
 
         #print(self.H.shape, x_lorenz.shape, y_lorenz.shape)
         for t in range(0, T):
@@ -374,10 +372,76 @@ class Lorenz96SSM(object):
 
         return y_lorenz_d
 
-    def generate_single_sequence(self, T, sigma_e2_dB, smnr_dB):
+    def generate_single_sequence(self, T, q2, smnr_dB):
 
         T_time = T * self.delta
-        x_lorenz = self.generate_state_sequence(T_time=T_time, sigma_e2_dB=sigma_e2_dB)
+        x_lorenz = self.generate_state_sequence(T_time=T_time, q2=q2)
         y_lorenz = self.generate_measurement_sequence(T=T, x_lorenz=x_lorenz, smnr_dB=smnr_dB)
 
         return x_lorenz, y_lorenz
+
+
+class UniformCircularMotionSSM(object):
+
+    def __init__(self, theta=10 * 2 * math.pi / 360, mean_q=0, mean_r=0, linear_H=False) -> None:
+        self.n_states = 2
+        self.n_obs = 2
+        self.mean_q = mean_q
+        self.mean_r = mean_r
+        self.theta = theta
+        self.linear_H = linear_H
+
+    def setStateCov(self, q2=0.1):
+        self.cov_q = q2 * np.eye(self.n_states)
+
+    def setMeasurementCov(self, r2=1.0):
+        self.cov_r = r2 * np.eye(self.n_obs)
+
+    def f_fn(self, x):
+        F = np.array([[math.cos(self.theta), -math.sin(self.theta)], [math.sin(self.theta), math.cos(self.theta)]])
+
+        return (F @ x.reshape(-1, 1)).reshape(1, -1)
+
+    def h_fn(self, x):
+        if self.linear_H:
+            return x
+        else:
+            x = x.reshape(-1)
+            y1 = np.sqrt(x[0] ** 2 + x[1] ** 2)
+            y2 = np.arctan2(x[1], x[0])
+            return np.array([y1, y2])
+
+    def generate_state_sequence(self, T, q2):
+        self.q2 = q2
+        self.setStateCov(q2=self.q2)
+
+        state_tmp = np.zeros((T + 1, self.n_states))
+
+        theta = np.random.uniform(0, 2 * np.pi)
+        dr = 1.0
+        init_state = np.sqrt(dr) * np.array([np.cos(theta), np.sin(theta)]).reshape((1, -1))
+        state_tmp[0] = init_state
+        e_k_arr = np.random.multivariate_normal(self.mean_q, self.cov_q, size=(T + 1, ))
+
+        for t in range(0, T):
+            state_tmp[t + 1] = self.f_fn(state_tmp[t]) + e_k_arr[t]
+
+        return state_tmp
+
+    def generate_measurement_sequence(self, x, T, r2):
+        self.r2 = r2
+        self.setMeasurementCov(r2=self.r2)
+        w_k_arr = np.random.multivariate_normal(self.mean_r, self.cov_r, size=(T, ))
+
+        obs_tmp = np.zeros((T, self.n_obs))
+        for t in range(0, T):
+            obs_tmp[t] = self.h_fn(x[t]) + w_k_arr[t]
+
+        return obs_tmp
+
+    def generate_single_sequence(self, T, q2, r2):
+
+        x_ucm = self.generate_state_sequence(T=T, q2=q2)
+        y_ucm = self.generate_measurement_sequence(x=x_ucm, T=T, r2=r2)
+
+        return x_ucm, y_ucm

@@ -169,8 +169,8 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
         'LinearSSM': {
             'n_states': n_states,
             'n_obs': n_obs,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
             'gamma': 0.8,
             'beta': 1.0},
         # Parameters of the Lorenz Attractor model
@@ -183,8 +183,8 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
             'H': None,  # By default, H is initialized to an identity matrix
             'delta_d': 0.002,
             'decimate': False,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
             'use_Taylor': True},
         'ChenSSM': {
             'n_states': n_states,
@@ -195,8 +195,8 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
             'H': None,  # By default, H is initialized to an identity matrix
             'delta_d': dt_chen / 5,
             'decimate': False,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
             'use_Taylor': True},
         'Lorenz96SSM': {
             'n_states': n_states,
@@ -205,7 +205,7 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
             'H': None,  # By default, H is initialized to an identity matrix
             'delta_d': dt_L96 / 2,
             'decimate': False,
-            'mu_w': np.zeros((n_obs, )),
+            'mean_r': np.zeros((n_obs, )),
             'method': 'RK45',
             'F_mu': 8.0},
         'Lorenz96SSMn{}'.format(n_obs): {
@@ -216,7 +216,7 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
                              n_obs=n_obs),  # By default, H is initialized to an identity matrix
             'delta_d': dt_L96 / 2,
             'decimate': False,
-            'mu_w': np.zeros((n_obs, )),
+            'mean_r': np.zeros((n_obs, )),
             'method': 'RK45',
             'F_mu': 8.0},
         'Lorenz96SSMrn{}'.format(n_obs): {
@@ -227,7 +227,7 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
                              n_obs=n_obs),  # By default, H is initialized to an identity matrix
             'delta_d': dt_L96 / 2,
             'decimate': False,
-            'mu_w': np.zeros((n_obs, )),
+            'mean_r': np.zeros((n_obs, )),
             'method': 'RK45',
             'F_mu': 8.0},
         'LorenzSSMn2': {
@@ -239,8 +239,8 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
             'H': np.array([[0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]),  # By default, H is initialized to an identity matrix
             'delta_d': 0.002,
             'decimate': False,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
             'use_Taylor': True},
         'LorenzSSMrn3': {
             'n_states':
@@ -260,9 +260,9 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
             0.002,
             'decimate':
             False,
-            'mu_e':
+            'mean_q':
             np.zeros((n_states, )),
-            'mu_w':
+            'mean_r':
             np.zeros((n_obs, )),
             'use_Taylor':
             True},
@@ -277,8 +277,8 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
                             0.06895693]]),  # By default, H is initialized to an identity matrix
             'delta_d': 0.002,
             'decimate': False,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
             'use_Taylor': True},
         'LorenzSSMn1': {
             'n_states': n_states,
@@ -290,7 +290,17 @@ def get_parameters(n_states=5, n_obs=5, J_gen=5, dt=0.02, dt_chen=0.002, dt_L96=
                                 axis=1),  # By default, H is initialized to an identity matrix
             'delta_d': 0.002,
             'decimate': False,
-            'mu_e': np.zeros((n_states, )),
-            'mu_w': np.zeros((n_obs, )),
-            'use_Taylor': True}}
+            'mean_q': np.zeros((n_states, )),
+            'mean_r': np.zeros((n_obs, )),
+            'use_Taylor': True},
+        'NL_UCM_SSM': {
+            'theta': 10 * 2 * math.pi / 360,
+            'mean_q': np.zeros((2, )),
+            'mean_r': np.zeros((2, )),
+            'linear_H': False},
+        'L_UCM_SSM': {
+            'theta': 10 * 2 * math.pi / 360,
+            'mean_q': np.zeros((2, )),
+            'mean_r': np.zeros((2, )),
+            'linear_H': True}}
     return ssm_parameters_dict

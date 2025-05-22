@@ -1,4 +1,4 @@
-import sys
+from typing import Tuple, Iterable
 import os
 import argparse
 import pickle as pkl
@@ -6,28 +6,38 @@ from filternet.utils import logger
 import numpy as np
 from datetime import datetime
 import torch
-from lorenz_params import get_parameters
-from lorenz_models import LorenzSSM, LinearSSM, Lorenz96SSM
+from datasets_tools.synthetic_datasets.params import get_parameters
+from models import LorenzSSM, LinearSSM, Lorenz96SSM, UniformCircularMotionSSM
 
 
-def obtain_tr_val_test_idx(dataset, tr_to_test_split=0.9, tr_to_val_split=0.83):
+def obtain_tr_val_test_idx(dataset: Iterable,
+                           tr_ratio: float = 0.8,
+                           val_ratio: float = 0.1) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """This function returns the indices for the training, validation and test
+    sets. The ratio of the training, validation and test sets is given by the
+    ratios `tr_ratio`, `val_ratio` and `1-tr_ratio-val_ratio`
 
-    num_training_plus_test_samples = len(dataset)
-    print('Total number of samples: {}'.format(num_training_plus_test_samples))
-    print('Training + val to test split: {}'.format(tr_to_test_split))
-    print('Training to val split: {}'.format(tr_to_val_split))
+    Args:
+        dataset (_type_):
+        tr_ratio (float, optional): _description_. Defaults to 0.8.
+        val_ratio (float, optional): _description_. Defaults to 0.1.
 
-    num_train_plus_val_samples = int(tr_to_test_split * num_training_plus_test_samples)
-    # num_test_samples = num_training_plus_test_samples - num_train_plus_val_samples
-    num_train_samples = int(tr_to_val_split * num_train_plus_val_samples)
-    num_val_samples = num_train_plus_val_samples - num_train_samples
+    Returns:
+        Tuple[torch.Tensor, torch.Tensor, torch.Tensor]: _description_
+    """
+    num_samples = len(dataset)
+    logger.info('Total number of samples: {}'.format(num_samples))
+    indices = torch.randperm(num_samples)
 
-    indices = torch.randperm(num_training_plus_test_samples).tolist()
-    tr_indices = indices[:num_train_samples]
-    val_indices = indices[num_train_samples:num_train_samples + num_val_samples]
-    test_indices = indices[num_train_samples + num_val_samples:]
+    train_size = int(tr_ratio * num_samples)
+    val_size = int(val_ratio * num_samples)
+    test_size = num_samples - train_size - val_size
+    logger.info(f'Training size: {train_size}, Val size: {val_size}, Test size: {test_size}')
 
-    return tr_indices, val_indices, test_indices
+    train_indices = indices[:train_size]
+    val_indices = indices[train_size:train_size + val_size]
+    test_indices = indices[-test_size:]
+    return train_indices, val_indices, test_indices
 
 
 def initialize_model(type_, parameters):
@@ -57,12 +67,13 @@ def initialize_model(type_, parameters):
     Returns:
         model: Object of model-class that is returned
     """
+    print(type_)
     if type_ == 'LinearSSM':
 
         model = LinearSSM(n_states=parameters['n_states'],
                           n_obs=parameters['n_obs'],
-                          mu_e=parameters['mu_e'],
-                          mu_w=parameters['mu_w'],
+                          mean_q=parameters['mean_q'],
+                          mean_r=parameters['mean_r'],
                           gamma=parameters['gamma'],
                           beta=parameters['beta'])
 
@@ -75,8 +86,8 @@ def initialize_model(type_, parameters):
                           delta_d=parameters['delta_d'],
                           alpha=parameters['alpha'],
                           decimate=parameters['decimate'],
-                          mu_e=parameters['mu_e'],
-                          mu_w=parameters['mu_w'])
+                          mean_q=parameters['mean_q'],
+                          mean_r=parameters['mean_r'])
 
     elif type_ == 'ChenSSM':
 
@@ -87,10 +98,10 @@ def initialize_model(type_, parameters):
                           delta_d=parameters['delta_d'],
                           alpha=parameters['alpha'],
                           decimate=parameters['decimate'],
-                          mu_e=parameters['mu_e'],
-                          mu_w=parameters['mu_w'])
+                          mean_q=parameters['mean_q'],
+                          mean_r=parameters['mean_r'])
 
-    elif type_ == 'Lorenz96SSM' or 'Lorenz96SSMn' in type_ or 'Lorenz96SSMrn' in type_:
+    elif type_ in ['Lorenz96SSM', 'Lorenz96SSMn', 'Lorenz96SSMrn']:
 
         model = Lorenz96SSM(n_states=parameters['n_states'],
                             n_obs=parameters['n_obs'],
@@ -100,10 +111,9 @@ def initialize_model(type_, parameters):
                             method=parameters['method'],
                             H=parameters['H'],
                             decimate=parameters['decimate'],
-                            mu_w=parameters['mu_w'])
+                            mean_r=parameters['mean_r'])
 
-    elif type_ == 'LorenzSSMn2' or 'LorenzSSMn1' or 'LorenzSSMrn2' or 'LorenzSSMrn3':
-
+    elif type_ in ['LorenzSSMn2', 'LorenzSSMn1', 'LorenzSSMrn2', 'LorenzSSMrn3']:
         model = LorenzSSM(n_states=parameters['n_states'],
                           n_obs=parameters['n_obs'],
                           J=parameters['J'],
@@ -112,8 +122,17 @@ def initialize_model(type_, parameters):
                           alpha=parameters['alpha'],
                           H=parameters['H'],
                           decimate=parameters['decimate'],
-                          mu_e=parameters['mu_e'],
-                          mu_w=parameters['mu_w'])
+                          mean_q=parameters['mean_q'],
+                          mean_r=parameters['mean_r'])
+
+    elif type_ in ['NL_UCM_SSM', 'L_UCM_SSM']:
+        model = UniformCircularMotionSSM(theta=parameters['theta'],
+                                         linear_H=parameters['linear_H'],
+                                         mean_q=parameters['mean_q'],
+                                         mean_r=parameters['mean_r'])
+
+    else:
+        raise ValueError('Unknown model type')
 
     return model
 
@@ -194,9 +213,7 @@ def generate_state_observation_pairs(type_, parameters, T=100, N_samples=1000, r
     # Z_XY['ssm_model'] = ssm_model
 
     samples = np.arange(N_samples)
-    tr_indices, val_indices, test_indices = obtain_tr_val_test_idx(dataset=samples,
-                                                                   tr_to_test_split=0.9,
-                                                                   tr_to_val_split=0.833)
+    tr_indices, val_indices, test_indices = obtain_tr_val_test_idx(dataset=samples)
 
     for i in range(N_samples):
 
@@ -258,13 +275,7 @@ def create_and_save_dataset(T, N_samples, filename, parameters, type_='LorenzSSM
 
 if __name__ == '__main__':
 
-    usage = 'Create datasets by simulating state space models \n'\
-            'Example usage (square brackets indicate meaningful values): \
-            python generate_data.py --n_states [3] --n_obs [3] --num_samples [1000] --sequence_length [100] \
-            --sigma_e2_dB [-10.0] --smnr_dB 10.0 --dataset_type [LinearSSM/LorenzSSM/Lorenz96SSM] \
-            --output_path [./data/synthetic_data/stored_data]\n'\
-            'Creates the dataset at the location output_path'\
-
+    usage = 'Create datasets by simulating state space models'
     parser = argparse.ArgumentParser(description='')
 
     parser.add_argument('--n_states', help='denotes the number of states in the latent model', type=int, default=5)
@@ -277,10 +288,11 @@ if __name__ == '__main__':
     parser.add_argument('--r2', help='denotes the process noise variance', type=float, default=-10.0)
     parser.add_argument('--q2', help='denotes the process noise variance', type=float, default=-10.0)
 
-    parser.add_argument('--dataset_type',
-                        help='specify type of the SSM (LinearSSM / LorenzSSM / ChenSSM / Lorenz96SSM)',
-                        type=str,
-                        default=None)
+    parser.add_argument(
+        '--dataset_type',
+        help='specify type of the SSM (LinearSSM / LorenzSSM / ChenSSM / Lorenz96SSM, NL_UCM_SSM, L_UCM_SSM)',
+        type=str,
+        default=None)
     parser.add_argument('--output_path', help='Enter full path to store the data file', type=str, default=None)
     parser.add_argument('--force', help='force to generate', action='store_true')
 
@@ -295,7 +307,8 @@ if __name__ == '__main__':
     r2 = args.r2
     q2 = args.q2
     logger.info(f'Generating {r2=}, {q2=}')
-
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
     # Create the full path for the datafile
     datafilename = create_filename(T=T,
                                    N_samples=N_samples,
@@ -305,15 +318,10 @@ if __name__ == '__main__':
                                    type_=type_,
                                    r2=r2,
                                    q2=q2)
-
     ssm_parameters = get_parameters(n_states=n_states, n_obs=n_obs)
 
-    if not os.path.exists(output_path):
-        os.mkdir(output_path)
-    # If the dataset hasn't been already created, create the dataset
-    # if not os.path.isfile(datafilename) or args.force:
     if len(os.listdir(output_path)) == 0 or args.force:
-        # print('Creating the data file: {}'.format(datafilename))
+
         datafilename = create_and_save_dataset(T=T,
                                                N_samples=N_samples,
                                                filename=datafilename,
@@ -325,4 +333,4 @@ if __name__ == '__main__':
     else:
         logger.info('Dataset {} is already present!'.format(datafilename))
 
-    print(f'Dataset saved successfully, at {datafilename}')
+    logger.info(f'Dataset saved successfully, at {datafilename}')

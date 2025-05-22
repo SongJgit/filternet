@@ -8,7 +8,7 @@ To facilitate observation, we did not generate data with a `dB` setting, but bas
 
 ### Preparation of data
 
-Recommended to check the documentation here: [ROOT_DIR/datasets_tools/lorenz_datasets/README.md](../../datasets_tools/lorenz_datasets/README.md)
+Recommended to check the documentation here: [ROOT_DIR/datasets_tools/synthetic_datasets/README.md](../../datasets_tools/synthetic_datasets/README.md)
 
 ### Training & Validation & Testing
 
