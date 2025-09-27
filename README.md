@@ -533,8 +533,6 @@ If you find this repo useful, please cite our papers.
   keywords={Training;Sensor fusion;Global Positioning System;Navigation;Vectors;Kalman filters;Wheels;Integrated navigation and localization;Kalman filter;recurrent neural networks;sensor fusion},
   doi={10.1109/LSP.2024.3431443}}
 
-
-
 ```
 
 Others
