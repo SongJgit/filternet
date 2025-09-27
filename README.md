@@ -226,13 +226,14 @@ This library is implemented with **[Pytorch-Lightning](https://lightning.ai/docs
 
 Note: In order to compare with other models, DANSE is trained using a supervised method from the source code.
 
-|    Methods    | Params | RMSE@1  | RMSE@10 | RMSE@100 | RMSE@1000 |                 Config                 |
-| :-----------: | :----: | :-----: | :-----: | :------: | :-------: | :------------------------------------: |
-| **Obs Error** |  None  |  2.31   |  3.78   |  10.26   |   31.56   |                  None                  |
-|   **KNet**    | 366 K  | 0.60431 | 1.18635 |  2.8958  |    Nan    | [config](configs/lorenz/knet_arch2.py) |
-|   **SKNet**   | 149 K  | 0.39873 | 0.91222 | 2.01605  |  5.37797  |   [config](configs/lorenz/sknet.py)    |
-|   **DANSE**   | 4.3 K  | 0.59011 | 1.20016 | 3.11831  |  7.99238  |   [config](configs/lorenz/danse.py)    |
-|  **SIKNet**   | 140 K  | 0.49095 | 0.82325 | 2.03247  |  5.28136  |   [config](configs/lorenz/siknet.py)   |
+|    Methods    | Params | RMSE@1 | RMSE@10 | RMSE@100 | RMSE@1000 |                 Config                 |
+| :-----------: | :----: | :----: | :-----: | :------: | :-------: | :------------------------------------: |
+| **Obs Error** |  None  |  2.31  |  3.78   |  10.26   |   31.56   |                  None                  |
+| **KNetArch1** | 366 K  |        |         |          |    Nan    | [config](configs/lorenz/knet_arch1.py) |
+| **KNetArch2** | 366 K  |        |         |          |    Nan    | [config](configs/lorenz/knet_arch2.py) |
+|   **SKNet**   | 149 K  |        |         |          |           |   [config](configs/lorenz/sknet.py)    |
+|   **DANSE**   | 4.3 K  |        |         |          |           |   [config](configs/lorenz/danse.py)    |
+|  **SIKNet**   | 140 K  |        |         |          |           |   [config](configs/lorenz/siknet.py)   |
 
 ### NCLT Sensor Fusion
 
@@ -522,6 +523,17 @@ If you find this repo useful, please cite our papers.
   pages={1890-1894},
   keywords={Training;Sensor fusion;Global Positioning System;Navigation;Vectors;Kalman filters;Wheels;Integrated navigation and localization;Kalman filter;recurrent neural networks;sensor fusion},
   doi={10.1109/LSP.2024.3431443}}
+
+
+@misc{song2025motionestimationmultiobjecttracking,
+      title={Motion Estimation for Multi-Object Tracking using KalmanNet with Semantic-Independent Encoding},
+      author={Jian Song and Wei Mei and Yunfeng Xu and Qiang Fu and Renke Kou and Lina Bu and Yucheng Long},
+      year={2025},
+      eprint={2509.11323},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2509.11323},
+}
 ```
 
 Others
