@@ -513,6 +513,15 @@ If you find this repo useful, please cite our papers.
 <a id="anchor1"></a>
 
 ```bibtex
+@misc{song2025motionestimationmultiobjecttracking,
+      title={Motion Estimation for Multi-Object Tracking using KalmanNet with Semantic-Independent Encoding},
+      author={Jian Song and Wei Mei and Yunfeng Xu and Qiang Fu and Renke Kou and Lina Bu and Yucheng Long},
+      year={2025},
+      eprint={2509.11323},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2509.11323},
+}
 @ARTICLE{10605082,
   author={Song, Jian and Mei, Wei and Xu, Yunfeng and Fu, Qiang and Bu, Lina},
   journal={IEEE Signal Processing Letters},
@@ -525,15 +534,7 @@ If you find this repo useful, please cite our papers.
   doi={10.1109/LSP.2024.3431443}}
 
 
-@misc{song2025motionestimationmultiobjecttracking,
-      title={Motion Estimation for Multi-Object Tracking using KalmanNet with Semantic-Independent Encoding},
-      author={Jian Song and Wei Mei and Yunfeng Xu and Qiang Fu and Renke Kou and Lina Bu and Yucheng Long},
-      year={2025},
-      eprint={2509.11323},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2509.11323},
-}
+
 ```
 
 Others
