@@ -4,9 +4,13 @@ lightning_logs
 __pycache__
 weights
 DATA
-data/*
-!data/nclt_fusion/*.pt
+data/
+!data/lorenz_data/*.pkl
+!data/NCLTFusion/*
 filternet.egg-info/
 .vscode
 outputs/
-.ruff_cache
+*.pkl
+notebook/.jpg
+forpaper/
+.ruff_cache/
