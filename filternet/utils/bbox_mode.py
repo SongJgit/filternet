@@ -1,10 +1,7 @@
 import torch
-from typing import Union
-from torch import Tensor
-from numpy import ndarray
 
 
-def bbox_cxcyah_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
+def bbox_cxcyah_to_xyxy(bboxes):
     """Convert bbox coordinates from (cx, cy, ratio, h) to (x1, y1, x2, y2).
 
     Args:
@@ -26,7 +23,7 @@ def bbox_cxcyah_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
     return x1y1x2y2
 
 
-def bbox_cxcywh_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
+def bbox_cxcywh_to_xyxy(bboxes):
     """Convert bbox coordinates from (cx, cy, w, h) to (x1, y1, x2, y2).
 
     Args:
@@ -47,7 +44,7 @@ def bbox_cxcywh_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
     return x1y1x2y2
 
 
-def bbox_xyxy_to_x1y1wh(bbox) -> Union[Tensor, ndarray]:
+def bbox_xyxy_to_x1y1wh(bbox):
     """Convert bbox coordinates from (x1, y1, x2, y2) to (x1, y1, w, h).
 
     Args:
@@ -68,7 +65,7 @@ def bbox_xyxy_to_x1y1wh(bbox) -> Union[Tensor, ndarray]:
     return bbox_new
 
 
-def bbox_cxcywh_to_x1y1wh(bbox) -> Union[Tensor, ndarray]:
+def bbox_cxcywh_to_x1y1wh(bbox):
     """Convert bbox coordinates from (cx, cy, w, h) to (x1, y1, w, h).
 
     Args:
@@ -89,7 +86,7 @@ def bbox_cxcywh_to_x1y1wh(bbox) -> Union[Tensor, ndarray]:
     return bbox_new
 
 
-def bbox_xyxy_to_cxcyah(bboxes) -> Union[Tensor, ndarray]:
+def bbox_xyxy_to_cxcyah(bboxes):
     """Convert bbox coordinates from (x1, y1, x2, y2) to (cx, cy, ratio, h).
 
     Args:
@@ -112,7 +109,7 @@ def bbox_xyxy_to_cxcyah(bboxes) -> Union[Tensor, ndarray]:
     return xyah
 
 
-def bbox_x1y1wh_to_cxcyah(bboxes) -> Union[Tensor, ndarray]:
+def bbox_x1y1wh_to_cxcyah(bboxes):
     """Convert bbox coordinates from (x1, y1, w, h) to (cx, cy, ratio, h).
 
     Args:
@@ -136,7 +133,7 @@ def bbox_x1y1wh_to_cxcyah(bboxes) -> Union[Tensor, ndarray]:
     return xyah
 
 
-def bbox_x1y1wh_to_cxcywh(bboxes) -> Union[Tensor, ndarray]:
+def bbox_x1y1wh_to_cxcywh(bboxes):
     """Convert bbox coordinates from (x1, y1, w, h) to (cx, cy, w, h).
 
     Args:
@@ -160,7 +157,7 @@ def bbox_x1y1wh_to_cxcywh(bboxes) -> Union[Tensor, ndarray]:
     return xywh
 
 
-def bbox_x1y1wh_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
+def bbox_x1y1wh_to_xyxy(bboxes):
     """Convert bbox coordinates from (x, y, w, h) to (x, y, x, y).
 
     Args:
@@ -184,7 +181,7 @@ def bbox_x1y1wh_to_xyxy(bboxes) -> Union[Tensor, ndarray]:
     return xyah
 
 
-def bbox_cxcyah_to_x1y1wh(bboxes) -> Union[Tensor, ndarray]:
+def bbox_cxcyah_to_x1y1wh(bboxes):
     """Convert bbox coordinates from (cx, cy, ratio, h) to (x1, y1, w, h).
 
     Args:
