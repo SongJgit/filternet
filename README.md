@@ -10,6 +10,8 @@
 
 ## Notice
 
+🎉🎉🎉 Our article "LAKALMANTRACKER: ROBUST LEARNING-AIDED KALMAN FILTERING FOR MULTI-OBJECT TRACKING" has been received by ICASSP26.
+
 We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
 
 You can view papers related to Learning-Aided Filtering through the following [links](https://github.com/SongJgit/awesome-learning-aided-filter-papers).
