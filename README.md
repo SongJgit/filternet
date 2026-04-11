@@ -11,6 +11,7 @@
 ## Notice
 
 🎉🎉🎉Excited to share that our paper "LAKALMANTRACKER: ROBUST LEARNING-AIDED KALMAN FILTERING FOR MULTI-OBJECT TRACKING" has been accepted to ICASSP 2026! 🎉🎉🎉
+
 🎉🎉🎉Excited to share that our paper "CNPE-KalmanNet: Learning-aided Kalman Filter With Complex Number Position Encoding" has been accepted to IEEE Signal Processing Letters! 🎉🎉🎉
 
 We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
