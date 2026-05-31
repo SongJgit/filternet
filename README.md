@@ -14,7 +14,9 @@
 
 🎉🎉🎉Excited to share that our paper "CNPE-KalmanNet: Learning-aided Kalman Filter With Complex Number Position Encoding" has been accepted to IEEE Signal Processing Letters! 🎉🎉🎉
 
-We will upload all the code once the paper submitted to "Information Fusion" has been accepted.
+🎉🎉🎉Excited to share that our paper "Motion Estimation for Multi-Object Tracking using KalmanNet with Semantic-Independent Encoding" has been accepted to Information Fusion! 🎉🎉🎉
+
+We are currently organizing the code and uploading it in stages.
 
 You can view papers related to Learning-Aided Filtering through the following [links](https://github.com/SongJgit/awesome-learning-aided-filter-papers).
 
@@ -519,8 +521,8 @@ If you find this repo useful, please cite our papers.
 ```bibtex
 @INPROCEEDINGS{11463682,
   author={Song, Jian and Mei, Wei and Xu, Yunfeng and Fu, Qiang and Kou, Renke and Bu, Lina and Long, Yucheng},
-  booktitle={ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
-  title={LAKALMANTracker: Robust Learning-Aided Kalman Filtering for Multi-Object Tracking}, 
+  booktitle={ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  title={LAKALMANTracker: Robust Learning-Aided Kalman Filtering for Multi-Object Tracking},
   year={2026},
   volume={},
   number={},
@@ -530,8 +532,8 @@ If you find this repo useful, please cite our papers.
 
 @ARTICLE{11434524,
   author={Long, Yucheng and Mei, Wei and Song, Jian and Xu, Yunfeng and Fu, Qiang and Bu, Lina},
-  journal={IEEE Signal Processing Letters}, 
-  title={CNPE-KalmanNet: Learning-Aided Kalman Filter With Complex Number Position Encoding}, 
+  journal={IEEE Signal Processing Letters},
+  title={CNPE-KalmanNet: Learning-Aided Kalman Filter With Complex Number Position Encoding},
   year={2026},
   volume={33},
   number={},
